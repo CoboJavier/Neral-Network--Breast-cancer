@@ -1,0 +1,68 @@
+clear; close all; clc;
+
+dataC=xlsread('cancerData.xlsx');
+
+%% 5
+X=dataC(:,(2:10));
+X(:,6) = [];
+
+%% 6
+Y=dataC(:,11);
+Y2=Y;
+Y2(Y2==2)=1;
+Y2(Y2==4)=2;
+Y=Y2;
+
+%% 7
+[m,n]=size(X);
+[m2,n2]=size(Y);
+
+
+Xx=round((70/100)*(m));
+Xy=round((70/100)*(m2));
+
+Yx=round((15/100)*(m));
+Yy=round((15/100)*(m2));
+
+XTr=X((1:Xx),:);
+YTr=Y((1:Xy),:);
+
+XV=X((Xx:(Xx+Yx)),:);
+YV=Y((Xy:(Xy+Yy)),:);
+
+XT=X(((m-Yx):m),:);
+YT=Y(((m-Yy):m2),:);
+
+%% 8
+
+lambda=[0.5;1;1.5];
+cont=1;
+conta=0;
+
+while cont <= 3
+    for i=1:5
+        for j=1:20
+            %Ws=nnLearning(XTr,YTr,2,i,lambda(cont,1),j);
+            
+            %B=nnLearning(XTr,YTr,2,i,lambda(cont,1),j);
+            %W1 = cell2mat(B(1,1));
+            %W2 = cell2mat(B(1,2));
+         
+            %yhat=nnOutput(XTr,W1,W2);
+            
+            Table(conta,1)=i;
+            
+            
+        end
+        
+    end
+    cont=cont+1;
+end
+
+
+
+
+
+
+
+
