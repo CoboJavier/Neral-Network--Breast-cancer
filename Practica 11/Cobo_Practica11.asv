@@ -33,31 +33,44 @@ YV=Y((Xy:(Xy+Yy)),:);
 XT=X(((m-Yx):m),:);
 YT=Y(((m-Yy):m2),:);
 
-%% 8
+%% 9
 
 lambda=[0.5;1;1.5];
 cont=1;
 conta=0;
 
+Table=zeros(1,1);
+
 while cont <= 3
     for i=1:5
         for j=1:20
+            conta=conta+1;
             %Ws=nnLearning(XTr,YTr,2,i,lambda(cont,1),j);
             
-            %B=nnLearning(XTr,YTr,2,i,lambda(cont,1),j);
-            %W1 = cell2mat(B(1,1));
-            %W2 = cell2mat(B(1,2));
-         
-            %yhat=nnOutput(XTr,W1,W2);
+            B=nnLearning(XTr,YTr,2,i,lambda(cont,1),j);
+            Ws(conta,:)=nnLearning(XTr,YTr,2,i,lambda(cont,1),j);
+            W1 = cell2mat(B(1,1));
+            W2 = cell2mat(B(1,2));
+                       
+            yhat=nnOutput(XV,W1,W2);
             
             Table(conta,1)=i;
+            Table(conta,2)=lambda(cont,1);
+            Table(conta,3)=j;
+            Table(conta,4)=computeMSE(YV, yhat');
             
-            
+                                 
         end
         
     end
     cont=cont+1;
 end
+
+%% 10
+
+[M,I] = min(Table(:,4));
+
+Wopt=(I,:);
 
 
 
