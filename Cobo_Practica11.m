@@ -45,11 +45,13 @@ YT=Y(((m-Yy):m2),:);
 
 lambda=[0.5;1;1.5];
 [fil, col]=size(lambda);
+
 cont=1;
 conta=0;
 
 max_iter=20;
 hidden_size=5;
+num_class=2;
 
 Table=zeros(1,1);
 
@@ -60,7 +62,7 @@ while cont <= fil
             %Ws=nnLearning(XTr,YTr,2,i,lambda(cont,1),j);
             
             %SAFE W1, W2 VECTOR IN A CELL MATRIX
-            B=nnLearning(XTr,YTr,2,i,lambda(cont,1),j);
+            B=nnLearning(XTr,YTr,num_class,i,lambda(cont,1),j);
             Ws(conta,:)=nnLearning(XTr,YTr,2,i,lambda(cont,1),j);
             W1 = cell2mat(B(1,1));
             W2 = cell2mat(B(1,2));
